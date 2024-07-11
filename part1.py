@@ -12,5 +12,10 @@ def read_calls(file: open) -> {(str, str): int}:
 
 
 def call1to2(calls: {(str, str): int}) -> {str: {str: int}}:
-    pass
-
+    call_dict = {}
+    for call in calls:
+        if call[0] in call_dict:
+            call_dict[call[0]][call[1]] = calls[call]
+        else:
+            call_dict[call[0]] = {call[1]: calls[call]}
+    return call_dict
