@@ -3,16 +3,16 @@ class NamespaceManager:
         self.namespace = {}
 
     def set_variable(self, name, value):
-        pass
+        self.namespace[name] = value
 
     def get_variable(self, name):
-        pass
+        return self.namespace[name]
 
     def delete_variable(self, name):
-        pass
+        del self.namespace[name]
 
     def list_variables(self):
-        pass
+        return self.namespace.keys()
 
     def execute_function(self, code):
-        pass
+        return exec(code, self.namespace)
