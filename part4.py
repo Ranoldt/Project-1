@@ -27,6 +27,24 @@ def stable_stock_matching(buyers_preferences, stocks_preferences):
 
 """
 
+"""
+length = len(buyers_preferences)
+new_dict = {}
+
+while len(new_dict) != length:
+    for i in list(buyers_preferences):
+        for l in list(stocks_preferences):
+            if i == stocks_preferences[l][0]:
+                new_dict[i] = l
+                del buyers_preferences[i]
+                del stocks_preferences[l]
+                for h in buyers_preferences:
+                    buyers_preferences[h].remove(l)
+                for k in stocks_preferences:
+                    stocks_preferences[k].remove(i)
+                break
+"""
+
 if __name__ == '__main__':
     buyers_preferences = {
         'Buyer1': ['StockA', 'StockB', 'StockC'],
@@ -40,20 +58,5 @@ if __name__ == '__main__':
         'StockC': ['Buyer1', 'Buyer2', 'Buyer3']
     }
 
-    x = list(buyers_preferences).copy()
-    y = list(stocks_preferences).copy()
-    length = len(buyers_preferences)
-    new_dict = {}
-
-    while len(new_dict) != length:
-        for i in range(length):
-            if x[i] == stocks_preferences[y[i]][0]:
-                new_dict[x[i]] = y[i]
-                del buyers_preferences[x[i]]
-                del stocks_preferences[y[i]]
-                for l in buyers_preferences:
-                    buyers_preferences[l].remove(y[i])
-                for w in stocks_preferences:
-                    stocks_preferences[w].remove(x[i])
 
     print(stable_stock_matching(buyers_preferences, stocks_preferences))
