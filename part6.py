@@ -1,15 +1,23 @@
 class PeekableIterator:
     def __init__(self, iterable):
-        pass
+        self.iterator = iter(iterable)
+        self.count = 0
 
     def __iter__(self):
-        pass
+        return self
 
     def __next__(self):
-        pass
+        self.count += 1
+        return self.iterator[self.count]
 
     def peek(self):
         pass
 
     def has_next(self):
-        pass
+        try:
+            self.peek()
+            return True
+        except StopIteration:
+            return False
+
+

@@ -9,5 +9,6 @@ def question2(n: dict) -> dict:
 def question3(n: dict, m: dict) -> dict:
     return {key: n.get(key, 0) + m.get(key, 0) for key in list(n) + list(m)}
 
+
 def question4(n: list) -> list:
-    return list({element for element in [element for sublist in n for element in sublist] if [element for sublist in n for element in sublist].count(element) >1})
+    return list({element for element in [element for sublist in n for element in sublist] if [element for sublist in n for element in sublist].count(element) > 1})
