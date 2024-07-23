@@ -58,7 +58,25 @@ for i in buyers_preferences:
             if stocks_preferences[j].index(i) < stocks_preferences[j].index(newer_dict[j]):
                 new_dict[i] = j
 """
+"""
+new_dict = {}
+buyers = list(buyers_preferences)
 
+while len(buyers) != 0:
+    for i in buyers:
+        for j in stocks_preferences:
+            if j not in new_dict.values():
+                new_dict[i] = j
+                buyers.remove(i)
+                break
+            else:
+                newer_dict = {value: key for key,value in new_dict.items()}
+                if stocks_preferences[j].index(i) < stocks_preferences[j].index(newer_dict[j]):
+                    new_dict[i] = j
+                    buyers.remove(i)
+                    buyers.append(newer_dict[j])
+                    break
+"""
 
 if __name__ == '__main__':
     buyers_preferences = {
