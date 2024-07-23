@@ -45,6 +45,21 @@ while len(new_dict) != length:
                 break
 """
 
+"""
+new_dict = {}
+
+for i in buyers_preferences:
+    for j in stocks_preferences:
+        if j not in new_dict.values():
+            new_dict[i] = j
+            break
+        else:
+            newer_dict = {value: key for key,value in new_dict.items()}
+            if stocks_preferences[j].index(i) < stocks_preferences[j].index(newer_dict[j]):
+                new_dict[i] = j
+"""
+
+
 if __name__ == '__main__':
     buyers_preferences = {
         'Buyer1': ['StockA', 'StockB', 'StockC'],
