@@ -4,7 +4,7 @@ class PeekableIterator:
         self.iterator_double = iter(iterable)
         self.next_peek = None
         self.next_value = None
-        self.count = 1
+        self.count = 0
 
     def __iter__(self):
         return self
@@ -35,7 +35,7 @@ class PeekableIterator:
         try:
             for i in range(self.count):
                 next(self.iterator_double)
-            self.count = 1
+            self.count = 0
             return True
         except StopIteration:
             return False
