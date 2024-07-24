@@ -1,23 +1,59 @@
 class PeekableIterator:
     def __init__(self, iterable):
         self.iterator = iter(iterable)
-        self.count = 0
+        self.next_peek = None
+        self.next_value = None
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        self.count += 1
-        return self.iterator[self.count]
+        if self.next_value is None:
+            if self.next_peek is None:
+                self.next_value = next(self.iterator)
+                return self.next_value
+            else:
+                self.next_value = self.next_peek
+                return self.next_value
+        elif self.next_peek > self.next_value:
+            self.next_value = self.next_peek
+            return self.next_value
+        else:
+            self.next_value = next(self.iterator)
+            return self.next_value
+
+
 
     def peek(self):
-        pass
+        if self.next_value is None:
+            self.peek_value = next(self.iterator)
+            return self.peek_value
+        elif self.next_peek is None:
+            self.next_peek = next(self.iterator)
+            return self.next_peek
+        elif self.next_peek > self.next_value:
+            return self.next_peek
+        else:
+            self.next_peek = next(self.iterator)
+            return self.next_peek
+
+
 
     def has_next(self):
         try:
             self.peek()
+            self.next_peek = self.next_value
             return True
         except StopIteration:
             return False
 
-
+if __name__ == "__main__":
+    x = PeekableIterator(range(3))
+    print(next(x))
+    print(x.peek())
+    print(next(x))
+    print(x.peek())
+    print(x.peek())
+    print(x.has_next())
+    print(next(x))
+    print(x.has_next())
