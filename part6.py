@@ -33,7 +33,7 @@ class PeekableIterator:
 
     def has_next(self):
         try:
-            for i in range(self.count):
+            for i in range(self.count + 1):
                 next(self.iterator_double)
             self.count = 0
             return True
