@@ -14,30 +14,21 @@ class PeekableIterator:
             self.next_value = next(self.iterator)
             self.count += 1
             return self.next_value
-        elif self.next_value is None:
-            self.next_value = self.next_peek
-            return self.next_value
-        elif self.next_peek > self.next_value:
-            self.next_value = self.next_peek
-            return self.next_value
         else:
-            self.next_value = next(self.iterator)
-            self.count += 1
+            self.next_value = self.next_peek
+            self.next_peek = None
             return self.next_value
 
     def peek(self):
         if self.next_value is None:
             self.next_peek = next(self.iterator)
+            self.count += 1
             return self.next_peek
         elif self.next_peek is None:
             self.next_peek = next(self.iterator)
             self.count += 1
             return self.next_peek
-        elif self.next_peek > self.next_value:
-            return self.next_peek
         else:
-            self.next_peek = next(self.iterator)
-            self.count += 1
             return self.next_peek
 
     def has_next(self):
