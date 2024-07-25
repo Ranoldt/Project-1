@@ -3,87 +3,65 @@ def stable_stock_matching(buyers_preferences, stocks_preferences):
     stocks = list(stocks_preferences)
 
     while len(stocks) != 0:
-        for i in stocks[:]:
-            for j in buyers_preferences:
-                if j not in stable_buyers.values():
-                    stable_buyers[i] = j
-                    stocks.remove(i)
+        for stock in stocks[:]:
+            for buyer in buyers_preferences:
+                if buyer not in stable_buyers.values():
+                    stable_buyers[stock] = buyer
+                    stocks.remove(stock)
                     break
                 else:
                     stable_stocks = {value: key for key, value in stable_buyers.items()}
-                    if buyers_preferences[j].index(i) < buyers_preferences[j].index(stable_stocks[j]):
-                        stable_buyers[i] = j
-                        stocks.remove(i)
-                        stocks.append(stable_stocks[j])
+                    if buyers_preferences[buyer].index(stock) < buyers_preferences[buyer].index(stable_stocks[buyer]):
+                        stable_buyers[stock] = buyer
+                        stocks.remove(stock)
+                        stocks.append(stable_stocks[buyer])
                         break
     return stable_buyers
 
 
-if __name__ == '__main__':
-    buyers_preferences = {
-        '1': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '2': ['B', 'A', 'D', 'C', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '3': ['A', 'B', 'C', 'E', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '4': ['D', 'A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '5': ['C', 'B', 'A', 'E', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '6': ['E', 'D', 'C', 'B', 'A', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '7': ['F', 'E', 'D', 'C', 'B', 'A', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '8': ['G', 'F', 'E', 'D', 'C', 'B', 'A', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '9': ['H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '10': ['I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '11': ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '12': ['K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '13': ['L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '14': ['M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '15': ['N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'O', 'P', 'Q', 'R', 'S', 'T'],
-        '16': ['O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'P', 'Q', 'R', 'S', 'T'],
-        '17': ['P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'Q', 'R', 'S', 'T'],
-        '18': ['Q', 'P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'R', 'S', 'T'],
-        '19': ['R', 'Q', 'P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'S', 'T'],
-        '20': ['S', 'R', 'Q', 'P', 'O', 'N', 'M', 'L', 'K', 'J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A', 'T']
-    }
+"""
+Time Complexity: Answer ----- O(n^4) 
+    Initialization
+    -creating stable_buyers dictionary is O(1).
+    -creating stocks list copy of stocks_preferences is O(n) because it is dependent on the length of the list.
+    
+    Loops
+    -The while-loop is O(n) because it depends on the length of the stocks list.
+    -The first for-loop is 2n, simplified to O(n) because it copies the stocks list and iterates over it, but Big-O notation looks overall complexity.
+    -The second for-loop is O(n) because buyers_preferences is the same length as stocks list.
+    
+    Within the loops
+    -The first if-statement 'if buyer not in stable_buyers.values()' is O(n) because it iterates to the length of stable_buyers.
+    -when the if-statement is True, is O(n). The 'stocks.remove(stock)' is O(n) with the other two operations being O(1) constant time.
+    -when the if-statement is False, the stable_stocks dictionary comprehension is O(n) because it iterates to the length of stable_buyers.
+    -The second if-statement 'if buyers_preferences[buyer].index(stock) < buyers_preferences[buyer].index(stable_stocks[buyer])' is 2n, simplified to O(n) 
+        because it iterates to the length of buyers_preferences for index.
+    -The operations inside the second if-statement is O(n) because 'stocks.remove(stock)' is O(n) with the other three operations being O(1) constant time.
+    
+    Overall complexity:
+    -The initialization is O(n+1) = O(n)
+    -The loops are O(n) * O(n) * O(n) = O(n^3)
+    -Within the loops are 5*O(n) = O(n)
+    -Loops * Within the Loops + initialization = O(n^4) + O(n), which is simplified to O(n^4).
+"""
 
-    stocks_preferences = {
-        'A': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'B': ['2', '1', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'C': ['1', '2', '3', '5', '4', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'D': ['4', '2', '1', '3', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'E': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'F': ['7', '6', '5', '4', '3', '2', '1', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'G': ['8', '7', '6', '5', '4', '3', '2', '1', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'H': ['9', '8', '7', '6', '5', '4', '3', '2', '1', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'I': ['10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'J': ['11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'K': ['12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '13', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'L': ['13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '14', '15', '16', '17', '18', '19',
-              '20'],
-        'M': ['14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '15', '16', '17', '18', '19',
-              '20'],
-        'N': ['15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '16', '17', '18', '19',
-              '20'],
-        'O': ['16', '15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '17', '18', '19',
-              '20'],
-        'P': ['17', '16', '15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '18', '19',
-              '20'],
-        'Q': ['18', '17', '16', '15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1', '19',
-              '20'],
-        'R': ['19', '18', '17', '16', '15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2', '1',
-              '20'],
-        'S': ['20', '19', '18', '17', '16', '15', '14', '13', '12', '11', '10', '9', '8', '7', '6', '5', '4', '3', '2',
-              '1'],
-        'T': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',
-              '20']
-    }
+"""
+Space Complexity: Answer ------ O(n^2) - Assuming input lists are included, O(n) without input lists
+    Input lists:
+    -buyers_preferences is O(n^2) because n buyers has a list of n preferences.
+    -stocks_preferences is O(n^2) because n stocks has a list of n preferences.
 
-    print(stable_stock_matching(buyers_preferences, stocks_preferences))
+    Space:
+    -stable_buyers dictionary is O(n) at the worst.
+    -stocks list is O(n).
+    -stable_stocks dictionary is created multiple times, but it is O(n) at the worst.
+    Variables (stock, buyer) is O(1).
+    
+    Overall:
+    -if input lists are included: O(n^2) + O(n^2) + O(n) + O(n) + O(n) + O(1) = O(n^2).
+    -without input lists: O(n) + O(n) + O(n) + O(1) = O(n). 
+"""
+
+# Based on the complexity of the algorithm, I think the time and space complexity may not be the best, but it can
+# be considered optimal because it is polynomial rather than exponentially growing, especially with the two input lists.
+# Operating with two input lists designates at the very least O(n^2), especially when looping in between.

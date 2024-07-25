@@ -12,7 +12,7 @@ class NamespaceManager:
         del self.namespace[name]
 
     def list_variables(self):
-        return self.namespace.keys()
+        return list(self.namespace.keys())
 
     def execute_function(self, code):
         return exec(code, self.namespace)
