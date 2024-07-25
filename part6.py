@@ -1,9 +1,7 @@
 class PeekableIterator:
     def __init__(self, iterable):
         self.iterator = iter(iterable)
-        self.iterator_double = iter(iterable)
         self.next_peek = None
-        self.count = 0
 
     def __iter__(self):
         return self
@@ -11,7 +9,6 @@ class PeekableIterator:
     def __next__(self):
         if self.next_peek is None:
             self.next_value = next(self.iterator)
-            self.count += 1
             return self.next_value
         else:
             self.next_value = self.next_peek
@@ -21,7 +18,6 @@ class PeekableIterator:
     def peek(self):
         if self.next_peek is None:
             self.next_peek = next(self.iterator)
-            self.count += 1
             return self.next_peek
         else:
             return self.next_peek
