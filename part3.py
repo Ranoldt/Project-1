@@ -15,4 +15,5 @@ class NamespaceManager:
         return list(self.namespace.keys())
 
     def execute_function(self, code):
-        return exec(code, self.namespace)
+        exec(code, {}, self.namespace)
+        return self.namespace

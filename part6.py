@@ -28,16 +28,3 @@ class PeekableIterator:
                 return True
         except StopIteration:
             return False
-
-if __name__ == "__main__":
-    x = PeekableIterator(range(3))
-    print(x.has_next())
-    print(x.has_next())
-    print(next(x))
-    print(x.has_next())
-    print(next(x))
-    print(x.has_next())
-    print(x.peek())
-    print(next(x))
-    print(x.has_next())
-

@@ -1,6 +1,6 @@
 def read_calls(file: open) -> {(str, str): int}:
     call_dict = {}
-    with open(file) as file:
+    with open(file, 'r') as file:
         for line in file:
             line = line.strip().split(':')
             for val in line[1:]:

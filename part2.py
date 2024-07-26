@@ -12,4 +12,3 @@ def question3(n1: dict, n2: dict) -> dict:
 
 def question4(n: list) -> list:
     return list({element for element in [element for sublist in n for element in sublist] if [element for sublist in n for element in sublist].count(element) > 1})
-
